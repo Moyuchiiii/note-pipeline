@@ -30,6 +30,11 @@ on:
           - '1000'
           - '1500'
           - '2000'
+      deep_research:
+        description: '深掘りリサーチを使う'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -64,6 +69,7 @@ jobs:
             - トピック: ${{ inputs.topic }}
             - ソース素材: ${{ inputs.source_memo }}
             - 販売価格: ¥${{ inputs.price }}
+            - 深掘りリサーチ: ${{ inputs.deep_research }}
 
             ## 手順
             1. context/ フォルダのファイルを全て読む
@@ -119,6 +125,7 @@ jobs:
                - 具体性: 抽象→具体
                - 感情: 読者の感情を動かすポイント
                - リスク: 誤情報・誇張・情報漏洩チェック
+               - deep_researchがtrueの場合、drafts/research/ の検証済み事実リストを参照して根拠を補強
             4. note向け最終整形（表→リスト変換、コードブロック→インデント）
             5. 上書き保存してcommit/push
             6. メタ情報のstatusを edited に更新
